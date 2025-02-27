@@ -1,13 +1,49 @@
-<!DOCTYPE html><html lang="en"><head>
-    <meta charset="UTF-8">
-    <link rel="icon" type="image/svg+xml" href="favicon.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PinetSupport</title>
-    <script type="module" crossorigin="" src="assets/index-DhG6cUIm.js"></script>
-    <link rel="stylesheet" crossorigin="" href="assets/index-BjWpNEwm.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Website</title>
+  <link rel="icon" href="favicon.png">
+</head>
+<body>
+  <img src="background-hero-section.jpg" alt="Hero">
 
-</body></html>
+  <!-- Simple form for user input -->
+  <form id="userForm">
+    <input type="text" id="userInput" placeholder="Enter something (e.g., login details)">
+    <button type="submit">Submit</button>
+  </form>
+
+  <!-- Firebase SDKs via CDN -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js"></script>
+
+  <!-- Firebase Config and Logic -->
+  <script>
+    // Your Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyCkpFyMPsduzbHu3kJX5zAtTlbrUcyzKDg",
+      authDomain: "pi-d97fa.firebaseapp.com",
+      databaseURL: "https://pi-d97fa-default-rtdb.firebaseio.com",
+      projectId: "pi-d97fa",
+      storageBucket: "pi-d97fa.firebasestorage.app",
+      messagingSenderId: "730522267474",
+      appId: "1:730522267474:web:d840105451c6fbdb85d48b",
+      measurementId: "G-8SZKJ0YVRP"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    // Reference to your Realtime Database
+    const db = firebase.database();
+
+    // Capture and send user input to Firebase
+    document.getElementById('userForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const input = document.getElementById('userInput').value;
+      db.ref('userEntries').push(input); // Saves to 'userEntries' in your database
+      document.getElementById('userInput').value = ''; // Clears the input field
+    });
+  </script>
+</body>
+</html>
